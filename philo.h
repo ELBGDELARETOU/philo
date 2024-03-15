@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:52:25 by anaouali          #+#    #+#             */
-/*   Updated: 2024/03/08 12:20:31 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/03/15 13:27:43 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ typedef struct t_list
 
 typedef struct b_list
 {
-	pthread_mutex_t	mutex;
+	pthread_mutex_t	*mutex;
 	p_list			**individual_philo;
+	int				e;
 }					a_list;
 
 long				ft_atoi(char *str);
@@ -56,5 +57,9 @@ int					bigger_than_int(char *str);
 
 // threads funcitons
 int					threads_init(int argc, a_list *philo);
+void				create_philos_init_threads(int argc, char **argv,
+						a_list *philo);
+void				init_struct(int argc, char **argv,
+						p_list *individual_philo);
 
 #endif

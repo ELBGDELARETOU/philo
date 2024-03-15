@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:32:06 by anaouali          #+#    #+#             */
-/*   Updated: 2024/03/06 15:24:38 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/03/15 11:23:16 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_is_a_valid_num(char *argv, int i)
 	if (ft_strlen(argv) > 12 || (bigger_than_int(argv) > 0
 			&& ft_atoi(argv) <= 0))
 		return (0);
-	if (ft_atoi(argv) <= 0)
+	if (ft_atoi(argv) <= 1)
 		return (0);
 	return (1);
 }
