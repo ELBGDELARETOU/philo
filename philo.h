@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:52:25 by anaouali          #+#    #+#             */
-/*   Updated: 2024/03/15 13:27:43 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/03/18 15:26:07 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 
 typedef struct t_list
 {
-	pthread_mutex_t	mutex;
+	pthread_mutex_t	left_fork;
+	pthread_mutex_t	right_fork;
 
 	int				is_dead;
 	int				total_p_num;
@@ -40,8 +41,10 @@ typedef struct t_list
 typedef struct b_list
 {
 	pthread_mutex_t	*mutex;
+	pthread_t		*tab;
 	p_list			**individual_philo;
 	int				e;
+	int				i;
 }					a_list;
 
 long				ft_atoi(char *str);
