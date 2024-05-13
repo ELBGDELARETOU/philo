@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:50:58 by anaouali          #+#    #+#             */
-/*   Updated: 2024/03/11 11:50:02 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:47:55 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ long	ft_atoi(char *str)
 	}
 	return (atoi * signe);
 }
-void	*ft_memset(void *str, int c, size_t n)
+void	*ft_memset(void *str, size_t n)
 {
 	unsigned char	*str1;
 
 	str1 = str;
 	while (n > 0)
 	{
-		*str1 = c;
+		*str1 = 0;
 		n--;
 		str1++;
 	}

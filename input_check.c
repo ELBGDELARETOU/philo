@@ -6,16 +6,9 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:32:06 by anaouali          #+#    #+#             */
-/*   Updated: 2024/03/15 11:23:16 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:36:52 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// stocker ma liste avec les infos de mes philos dans un tableau
-// cree autant de threads que de philos
-// cree une routine pour tout les philo
-// verifier que aucun philos ne soit mort si cest le cas quitter proprement
-// sinon continuer a linfini ou s arreter si le 5eme argument a ete entree
-// fin.
 
 #include "philo.h"
 
@@ -60,7 +53,7 @@ int	ft_isalpha(char *s)
 
 	i = -1;
 	while (s[++i])
-		if (!(s[i] >= '0' && s[i] <= '9' || s[i] == '+'))
+		if (!((s[i] >= '0' && s[i] <= '9') || s[i] == '+'))
 			return (0);
 	return (1);
 }
