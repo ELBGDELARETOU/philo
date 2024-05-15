@@ -6,7 +6,7 @@
 /*   By: ademnaouali <ademnaouali@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:52:25 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/15 15:06:01 by ademnaouali      ###   ########.fr       */
+/*   Updated: 2024/05/15 16:41:32 by ademnaouali      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct t_info
 	int				philo_must_eat;
 	long long		time;
 
+	pthread_mutex_t	checker;
+	pthread_mutex_t	writing;
 	pthread_mutex_t	forks[200];
 	t_philo			philos[200];
 }					t_info;

@@ -36,6 +36,8 @@ void	get_my_infos(int ac, char **av, t_info *info)
 	info->philo_t_sleep = ft_atoi(av[4]);
 	if (ac == 6)
 		info->philo_must_eat = ft_atoi(av[5]);
+    else 
+        info->philo_must_eat = -1;
 }
 
 bool init(int ac, char **av, t_info *info)

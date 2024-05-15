@@ -6,17 +6,35 @@
 /*   By: ademnaouali <ademnaouali@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:21:19 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/15 16:12:43 by ademnaouali      ###   ########.fr       */
+/*   Updated: 2024/05/15 18:49:07 by ademnaouali      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	death_checker(t_info *info, t_philo *philo)
+void	is_dead(t_info *info, t_philo *philo)
 {
 	int i;
 
 	while (info->philo_must_eat)
+	{
+		i = -1;
+		while (++i < info->total_p_num && info->is_dead == 0)
+		{
+			pthread_mutex_lock(&(info->checker));
+			if((philo->finished_eating - ft_time()) > info->philo_t_die)
+			{
+				printf("%d is dead", philo->philo_id);
+				info->is_dead = 1;			
+			}
+			pthread_mutex_unlock(&(info->checker));
+			usleep(100);
+		}
+		if (info->is_dead == 1)
+			break;
+		else 
+			i++;
+	}
 }
 
 
@@ -48,7 +66,9 @@ void	*routine(void *param)
 		eating(philo);
 		if(info->finsished == 1)
 			break;
-		usleep(50);
+		printf("%d is sleeping\n", philo->philo_id);
+		usleep(100);
+		printf("%d is thinking\n", philo->philo_id);
 	}
 	return (NULL);
 }
@@ -67,7 +87,7 @@ int first_step(t_info *info)
 			return (1);
 		philo[i].finished_eating = ft_time();
 	}
-	// death_checker(info, info->philos);
+	is_dead(info, info->philos);
 	i = -1;
 	while (++i < info->total_p_num)
 		pthread_join(philo[i].thread_id, NULL);
@@ -89,5 +109,5 @@ int	main(int ac, char **av)
 		return(2);
 	if (first_step(info) == false)
 		return(3);
-	return(0);
+	return(free(info), 0);
 }
