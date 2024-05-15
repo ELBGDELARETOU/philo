@@ -1,6 +1,6 @@
 NAME = philo
 
-SRCS = new_test.c input_check.c utils.c
+SRCS = philo.c input_check.c utils.c init.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -13,14 +13,8 @@ ${NAME}: ${SRCS} makefile philo.h
 
 clean:
 		rm -rf ${OBJS}
-		rm -f ./libft.a
-		make -C ./libft clean
 
 fclean:
 		rm -rf ${NAME} ${OBJS}
-		rm -f ./libft.a
-		rm -f ./libmlx.a
-		make -C ./libft fclean
-		make -C ./minilibx-linux clean
 
 re: fclean all

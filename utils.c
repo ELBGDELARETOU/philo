@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademnaouali <ademnaouali@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:50:58 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/10 15:47:55 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:04:45 by ademnaouali      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,12 @@ void	*ft_memset(void *str, size_t n)
 		str1++;
 	}
 	return (str);
+}
+
+long long ft_time(void)
+{
+	struct timeval time;
+
+	gettimeofday(&time, NULL);
+	return  ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }

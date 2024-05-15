@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademnaouali <ademnaouali@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:52:25 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/10 16:49:43 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:06:01 by ademnaouali      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,18 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-# define NUM_PHILO = 0
-# define T_TO_DIE = 1
-# define T_TO_EAT = 2
-# define T_TO_SLEEP = 3
-# define MIN_EAT = 4
+#include <sys/time.h>
 
 struct t_info;
 
 typedef struct t_philo
 {
 	int				philo_id;
-	int				finished_eating;
+	long long		finished_eating;
 	int				l_fork;
 	int				r_fork;
-	struct t_info	*data_list;
+	int				eaten_meals;
+	struct t_info			*info_lst;
 	pthread_t		thread_id;
 }					t_philo;
 
@@ -52,23 +48,18 @@ typedef struct t_info
 	t_philo			philos[200];
 }					t_info;
 
+
+// utils
 long				ft_atoi(char *str);
 int					ft_strlen(char *str);
 int					ft_isdigit(char c);
 void				*ft_memset(void *str, size_t n);
+long long 			ft_time(void);
 
 // input check
 int					check_input(int argc, char **argv);
-int					check_valid_argument(int argc, char **argv);
-int					ft_isalpha(char *s);
-int					ft_is_a_valid_num(char *argv, int i);
-int					bigger_than_int(char *str);
 
-// threads funcitons
-// int					threads_init(int argc, a_list *philo);
-// void				create_philos_init_threads(int argc, char **argv,
-// 						t_list *philo);
-// void				init_struct(int argc, char **argv,
-// 						t_list *individual_philo);
+// init
+bool init(int ac, char **av, t_info *info);
 
 #endif

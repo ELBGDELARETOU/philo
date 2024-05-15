@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ademnaouali <ademnaouali@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:32:06 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/10 15:36:52 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/14 17:58:02 by ademnaouali      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 int	bigger_than_int(char *str)
 {
-	int	atoi;
 	int	signe;
 
 	signe = 1;
-	atoi = 0;
 	while ((*str == 32) || (*str >= 9 && *str <= 13))
 		str++;
 	if (*str == '-')
