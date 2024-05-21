@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ademnaouali <ademnaouali@student.42.fr>    +#+  +:+       +#+        */
+/*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:32:06 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/14 17:58:02 by ademnaouali      ###   ########.fr       */
+/*   Updated: 2024/05/21 15:48:36 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,16 @@ int	check_valid_argument(int argc, char **argv)
 	return (1);
 }
 
-int	check_input(int argc, char **argv)
+bool	check_input(int argc, char **argv)
 {
 	if (argc == 5 || argc == 6)
 	{
+		if (ft_atoi(argv[1]) > 200)
+			return (printf("Wrong number of philos\n"), false);
 		if (!(check_valid_argument(argc, argv)))
-			return (printf("Check your arguments... Somthing's wrong !\n"), 0);
-		return (1);
+			return (printf("Check your arguments... Somthing's wrong !\n"), false);
+		return (true);
 	}
 	else
-		return (printf("Wrong number of arguments\n"), 0);
+		return (printf("Wrong number of arguments\n"), false);
 }

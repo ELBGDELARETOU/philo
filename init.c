@@ -3,26 +3,26 @@
 
 bool	init_mutex(t_info *info)
 {
-	int i;
+	int	i;
 
 	i = info->total_p_num;
 	while (i-- > 0)
 	{
-		if(pthread_mutex_init(&(info->forks[i]), NULL))
-			return(false);
+		if (pthread_mutex_init(&(info->forks[i]), NULL))
+			return (false);
 	}
-    if (pthread_mutex_init(&(info->writing), NULL))
+	if (pthread_mutex_init(&(info->writing), NULL))
 		return (false);
 	if (pthread_mutex_init(&(info->checker), NULL))
 		return (false);
-	return(true);
+	return (true);
 }
 void	init_my_philos(t_info *info)
 {
 	int	i;
 
 	i = info->total_p_num;
-	while(i-- >= 0)
+	while (i-- >= 0)
 	{
 		info->philos[i].philo_id = i;
 		info->philos[i].l_fork = i;
@@ -43,15 +43,15 @@ void	get_my_infos(int ac, char **av, t_info *info)
 	info->is_dead = 0;
 	if (ac == 6)
 		info->must_eat = ft_atoi(av[5]);
-    else 
-        info->must_eat = -1;
+	else
+		info->must_eat = -1;
 }
 
-bool init(int ac, char **av, t_info *info)
+bool	init(int ac, char **av, t_info *info)
 {
 	get_my_infos(ac, av, info);
 	if (init_mutex(info) == false)
-		return(printf("Mutex probleme\n"),false);
+		return (printf("Mutex probleme\n"), false);
 	init_my_philos(info);
 	return (true);
 }
