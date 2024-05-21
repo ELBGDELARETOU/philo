@@ -6,7 +6,7 @@
 /*   By: ademnaouali <ademnaouali@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:52:25 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/15 16:41:32 by ademnaouali      ###   ########.fr       */
+/*   Updated: 2024/05/21 12:12:46 by ademnaouali      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ typedef struct t_philo
 
 typedef struct t_info
 {
-	int				finsished;
-	int				is_dead;
 	int				total_p_num;
 	int				philo_t_die;
 	int				philo_t_eat;
 	int				philo_t_sleep;
-	int				philo_must_eat;
+	int				must_eat;
+	int				eaten_all;
+	int				is_dead;
 	long long		time;
 
 	pthread_mutex_t	checker;
@@ -55,13 +55,19 @@ typedef struct t_info
 long				ft_atoi(char *str);
 int					ft_strlen(char *str);
 int					ft_isdigit(char c);
-void				*ft_memset(void *str, size_t n);
 long long 			ft_time(void);
+void				ft_sleep(long long time, t_info *rules);
+void				my_printf(t_info *info, int i, char *str);
+
+
 
 // input check
 int					check_input(int argc, char **argv);
 
 // init
 bool init(int ac, char **av, t_info *info);
+
+// first step
+int first_step(t_info *info);
 
 #endif
