@@ -6,7 +6,7 @@
 /*   By: ademnaouali <ademnaouali@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:21:19 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/21 12:17:06 by ademnaouali      ###   ########.fr       */
+/*   Updated: 2024/05/21 12:28:08 by ademnaouali      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,9 @@ int first_step(t_info *info)
 		if (pthread_create(&(philo[i].thread_id), NULL, routine, &(philo[i])))
 			return (1);
 		philo[i].finished_eating = ft_time();
+		is_dead(info, info->philos);
+
 	}
-	is_dead(info, info->philos);
 	i = -1;
 	while (++i < info->total_p_num)
 		pthread_join(philo[i].thread_id, NULL);
