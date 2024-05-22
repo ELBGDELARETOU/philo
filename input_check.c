@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 16:32:06 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/21 15:48:36 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:55:28 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ int	ft_is_a_valid_num(char *argv, int i)
 			return (1);
 	}
 	if (ft_strlen(argv) > 12 || (bigger_than_int(argv) > 0
-			&& ft_atoi(argv) <= 0))
+			&& ft_atoi(argv) < 0))
 		return (0);
-	if (ft_atoi(argv) <= 1)
-		return (0);
+	if (i != 1)
+		if (ft_atoi(argv) <= 1)
+			return (0);
 	return (1);
 }
 
@@ -79,7 +80,8 @@ bool	check_input(int argc, char **argv)
 		if (ft_atoi(argv[1]) > 200)
 			return (printf("Wrong number of philos\n"), false);
 		if (!(check_valid_argument(argc, argv)))
-			return (printf("Check your arguments... Somthing's wrong !\n"), false);
+			return (printf("Check your arguments... Somthing's wrong !\n"),
+				false);
 		return (true);
 	}
 	else
