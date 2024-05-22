@@ -6,26 +6,26 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:21:19 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/21 19:37:56 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:41:48 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_sleep(long long time, t_info *rules)
+void	ft_sleep(long long time, t_info *info)
 {
 	long long	i;
 
 	i = ft_time();
-	while (1)
+	while (info->is_dead != 1)
 	{
-		pthread_mutex_lock(&(rules->checker));
-		if (rules->is_dead)
+		pthread_mutex_lock(&(info->checker));
+		if (info->is_dead)
 		{
-			pthread_mutex_unlock(&(rules->checker));
+			pthread_mutex_unlock(&(info->checker));
 			break ;
 		}
-		pthread_mutex_unlock(&(rules->checker));
+		pthread_mutex_unlock(&(info->checker));
 		if ((ft_time() - i) >= time)
 			break ;
 		usleep(50);
@@ -67,7 +67,7 @@ void	is_dead(t_info *info, t_philo *philo)
 	while (1)
 	{
 		i = -1;
-		while (++i < info->total_p_num)
+		while (++i < info->total_p_num  && info->is_dead != 1)
 		{
 			pthread_mutex_lock(&(info->checker));
 			if ((ft_time() - philo[i].finished_eating) > info->philo_t_die)
@@ -81,11 +81,6 @@ void	is_dead(t_info *info, t_philo *philo)
 			usleep(100);
 		}
 		pthread_mutex_lock(&(info->checker));
-		// if (info->is_dead)
-		// {
-		// 	pthread_mutex_unlock(&(info->checker));
-		// 	break ;
-		// }
 		if (info->must_eat != -1)
 		{
 			i = 0;
@@ -112,7 +107,7 @@ void	*routine(void *param)
 	info = philo->info_lst;
 	if (philo->philo_id % 2)
 		usleep(15000);
-	while (1)
+	while (1  && info->is_dead != 1)
 	{
 		pthread_mutex_lock(&(info->checker));
 		if (info->is_dead == 1 || info->eaten_all == 1)
@@ -137,7 +132,7 @@ int	first_step(t_info *info)
 	i = -1;
 	philo = info->philos;
 	info->time = ft_time();
-	while (++i < info->total_p_num)
+	while (++i < info->total_p_num && info->is_dead != 1)
 	{
 		if (pthread_create(&(philo[i].thread_id), NULL, routine, &(philo[i])))
 			return (1);
