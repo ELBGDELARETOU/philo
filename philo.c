@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:21:19 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/22 16:41:48 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:47:55 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,27 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(&(info->forks[philo->l_fork]));
 }
 
+int	is_dead2(t_info *info, t_philo *philo)
+{
+	int	i;
+
+	pthread_mutex_lock(&(info->checker));
+	if (info->must_eat != -1)
+	{
+		i = 0;
+		while (i < info->total_p_num && philo[i].eaten_meals >= info->must_eat)
+			i++;
+		if (i == info->total_p_num)
+		{
+			info->eaten_all = 1;
+			pthread_mutex_unlock(&(info->checker));
+			return (123);
+		}
+	}
+	pthread_mutex_unlock(&(info->checker));
+	return (0);
+}
+
 void	is_dead(t_info *info, t_philo *philo)
 {
 	int	i;
@@ -67,7 +88,7 @@ void	is_dead(t_info *info, t_philo *philo)
 	while (1)
 	{
 		i = -1;
-		while (++i < info->total_p_num  && info->is_dead != 1)
+		while (++i < info->total_p_num && info->is_dead != 1)
 		{
 			pthread_mutex_lock(&(info->checker));
 			if ((ft_time() - philo[i].finished_eating) > info->philo_t_die)
@@ -80,21 +101,8 @@ void	is_dead(t_info *info, t_philo *philo)
 			pthread_mutex_unlock(&(info->checker));
 			usleep(100);
 		}
-		pthread_mutex_lock(&(info->checker));
-		if (info->must_eat != -1)
-		{
-			i = 0;
-			while (i < info->total_p_num
-				&& philo[i].eaten_meals >= info->must_eat)
-				i++;
-			if (i == info->total_p_num)
-			{
-				info->eaten_all = 1;
-				pthread_mutex_unlock(&(info->checker));
-				break ;
-			}
-		}
-		pthread_mutex_unlock(&(info->checker));
+		if (is_dead2(info, philo) == 123)
+			break;
 	}
 }
 
@@ -107,7 +115,7 @@ void	*routine(void *param)
 	info = philo->info_lst;
 	if (philo->philo_id % 2)
 		usleep(15000);
-	while (1  && info->is_dead != 1)
+	while (1 && info->is_dead != 1)
 	{
 		pthread_mutex_lock(&(info->checker));
 		if (info->is_dead == 1 || info->eaten_all == 1)
