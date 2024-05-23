@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:15:09 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/23 16:18:27 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:21:54 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int ac, char **av)
 {
-	struct s_info	info;
+	struct t_info	info;
 
 	if (check_input(ac, av) == false)
 		return (1);

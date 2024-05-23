@@ -6,13 +6,13 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:14:53 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/23 16:17:23 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:21:44 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool	init_mutex(s_info *info)
+bool	init_mutex(t_info *info)
 {
 	int	i;
 
@@ -29,7 +29,7 @@ bool	init_mutex(s_info *info)
 	return (true);
 }
 
-void	init_my_philos(s_info *info)
+void	init_my_philos(t_info *info)
 {
 	int	i;
 
@@ -45,7 +45,7 @@ void	init_my_philos(s_info *info)
 	}
 }
 
-void	get_my_infos(int ac, char **av, s_info *info)
+void	get_my_infos(int ac, char **av, t_info *info)
 {
 	info->total_p_num = ft_atoi(av[1]);
 	info->philo_t_die = ft_atoi(av[2]);
@@ -59,7 +59,7 @@ void	get_my_infos(int ac, char **av, s_info *info)
 		info->must_eat = -1;
 }
 
-bool	init(int ac, char **av, s_info *info)
+bool	init(int ac, char **av, t_info *info)
 {
 	get_my_infos(ac, av, info);
 	if (init_mutex(info) == false)

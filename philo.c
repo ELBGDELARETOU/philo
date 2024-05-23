@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:21:19 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/23 16:17:49 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:22:13 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	eating(t_philo *philo)
 {
-	s_info	*info;
+	t_info	*info;
 
 	info = philo->info_lst;
 	if (philo->philo_id % 2)
@@ -40,7 +40,7 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(&(info->forks[philo->l_fork]));
 }
 
-int	is_dead2(s_info *info, t_philo *philo)
+int	is_dead2(t_info *info, t_philo *philo)
 {
 	int	i;
 
@@ -61,7 +61,7 @@ int	is_dead2(s_info *info, t_philo *philo)
 	return (0);
 }
 
-void	is_dead(s_info *info, t_philo *philo)
+void	is_dead(t_info *info, t_philo *philo)
 {
 	int	i;
 
@@ -89,7 +89,7 @@ void	is_dead(s_info *info, t_philo *philo)
 void	*routine(void *param)
 {
 	t_philo	*philo;
-	s_info	*info;
+	t_info	*info;
 
 	philo = (t_philo *)param;
 	info = philo->info_lst;
@@ -115,7 +115,7 @@ void	*routine(void *param)
 	return (NULL);
 }
 
-int	first_step(s_info *info)
+int	first_step(t_info *info)
 {
 	int		i;
 	t_philo	*philo;

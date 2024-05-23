@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:50:58 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/23 16:18:35 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:22:01 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ long long	ft_time(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-void	my_printf(s_info *info, int i, char *str)
+void	my_printf(t_info *info, int i, char *str)
 {
 	if (info->is_dead == 1 || info->eaten_all == 1)
 		return ;
