@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 16:15:09 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/23 16:18:27 by anaouali         ###   ########.fr       */
+/*   Created: 2024/05/23 16:13:26 by anaouali          #+#    #+#             */
+/*   Updated: 2024/05/23 16:18:13 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+void	ft_sleep(long long time, s_info *info)
 {
-	struct s_info	info;
+	long long	i;
 
-	if (check_input(ac, av) == false)
-		return (1);
-	if (init(ac, av, &info) == false)
-		return (2);
-	if (first_step(&info) == false)
-		return (3);
-	return (0);
+	i = ft_time();
+	while (1)
+	{
+		pthread_mutex_lock(&(info->checker));
+		if (info->is_dead)
+		{
+			pthread_mutex_unlock(&(info->checker));
+			break ;
+		}
+		pthread_mutex_unlock(&(info->checker));
+		if ((ft_time() - i) >= time)
+			break ;
+		usleep(50);
+	}
 }
