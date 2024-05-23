@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:50:58 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/23 15:07:04 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:11:42 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,15 @@ int	ft_isdigit(char c)
 int	ft_strlen(char *str)
 {
 	int	i;
+	int	j;
 
 	i = -1;
-	while (str[++i])
-		;
+	j = 0;
+	while (str[++i] == '0')
+		i++;
+	i = j;
+	while (str[j])
+		j++;
 	return (i);
 }
 
@@ -38,7 +43,7 @@ long	ft_atoi(char *str)
 	atoi = 0;
 	while ((*str == 32) || (*str >= 9 && *str <= 13))
 		str++;
-	while (*str == '-' || *str == '+')
+	while (*str == '-' || *str == '+' /* || *str == '0' */)
 	{
 		if (*str == '-')
 			signe = signe * -1;

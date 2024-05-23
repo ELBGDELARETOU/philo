@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:21:19 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/23 15:10:01 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:21:29 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,16 +118,19 @@ void	*routine(void *param)
 	while (1)
 	{
 		pthread_mutex_lock(&(info->checker));
-		if (info->is_dead == 1 || info->eaten_all == 1)
+		if (info->is_dead == 1 || info->eaten_all == 1
+			|| info->total_p_num == 1)
 		{
+			if (info->total_p_num == 1)
+				printf("%lld 1 is took a fork\n", (ft_time() - info->time));
 			pthread_mutex_unlock(&(info->checker));
 			break ;
 		}
 		pthread_mutex_unlock(&(info->checker));
 		eating(philo);
-		my_printf(info, philo->philo_id, "sleeping");
-		ft_sleep(info->philo_t_sleep, info);
 		my_printf(info, philo->philo_id, "thinking");
+		ft_sleep(info->philo_t_sleep, info);
+		my_printf(info, philo->philo_id, "sleeping");
 	}
 	return (NULL);
 }
