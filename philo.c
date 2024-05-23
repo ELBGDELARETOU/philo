@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:21:19 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/22 17:23:56 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:10:01 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_sleep(long long time, t_info *info)
 	long long	i;
 
 	i = ft_time();
-	while (info->is_dead != 1)
+	while (1)
 	{
 		pthread_mutex_lock(&(info->checker));
 		if (info->is_dead)
@@ -60,7 +60,7 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(&(info->forks[philo->l_fork]));
 }
 
-/* int	is_dead2(t_info *info, t_philo *philo)
+int	is_dead2(t_info *info, t_philo *philo)
 {
 	int	i;
 
@@ -79,7 +79,7 @@ void	eating(t_philo *philo)
 	}
 	pthread_mutex_unlock(&(info->checker));
 	return (0);
-} */
+}
 
 void	is_dead(t_info *info, t_philo *philo)
 {
@@ -88,7 +88,7 @@ void	is_dead(t_info *info, t_philo *philo)
 	while (1)
 	{
 		i = -1;
-		while (++i < info->total_p_num && info->is_dead != 1)
+		while (++i < info->total_p_num)
 		{
 			pthread_mutex_lock(&(info->checker));
 			if ((ft_time() - philo[i].finished_eating) > info->philo_t_die)
@@ -101,23 +101,8 @@ void	is_dead(t_info *info, t_philo *philo)
 			pthread_mutex_unlock(&(info->checker));
 			usleep(100);
 		}
-		pthread_mutex_lock(&(info->checker));
-		if (info->must_eat != -1)
-		{
-			i = 0;
-			while (i < info->total_p_num
-				&& philo[i].eaten_meals >= info->must_eat)
-				i++;
-			if (i == info->total_p_num)
-			{
-				info->eaten_all = 1;
-				pthread_mutex_unlock(&(info->checker));
-				break ;
-			}
-		}
-		pthread_mutex_unlock(&(info->checker));
-		// if (is_dead2(info, philo) == 123)
-		// 	break ;
+		if (is_dead2(info, philo) == 123)
+			break ;
 	}
 }
 
@@ -130,7 +115,7 @@ void	*routine(void *param)
 	info = philo->info_lst;
 	if (philo->philo_id % 2)
 		usleep(15000);
-	while (1 && info->is_dead != 1)
+	while (1)
 	{
 		pthread_mutex_lock(&(info->checker));
 		if (info->is_dead == 1 || info->eaten_all == 1)
@@ -155,7 +140,7 @@ int	first_step(t_info *info)
 	i = -1;
 	philo = info->philos;
 	info->time = ft_time();
-	while (++i < info->total_p_num && info->is_dead != 1)
+	while (++i < info->total_p_num)
 	{
 		if (pthread_create(&(philo[i].thread_id), NULL, routine, &(philo[i])))
 			return (1);
