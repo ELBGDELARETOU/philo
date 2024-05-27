@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:50:58 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/23 16:22:01 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:03:02 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ void	my_printf(t_info *info, int i, char *str)
 	if (info->is_dead == 1 || info->eaten_all == 1)
 		return ;
 	pthread_mutex_lock(&(info->writing));
-	printf("%lld %i is %s\n", (ft_time() - info->time), (i + 1), str);
+	printf("%lld %i %s\n", (ft_time() - info->time), (i + 1), str);
 	pthread_mutex_unlock(&(info->writing));
 }

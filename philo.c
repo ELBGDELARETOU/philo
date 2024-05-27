@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:21:19 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/23 16:22:13 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/27 19:19:03 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,26 @@ void	eating(t_philo *philo)
 	t_info	*info;
 
 	info = philo->info_lst;
-	if (philo->philo_id % 2)
+	if (philo->philo_id % 2 == 1)
 	{
 		pthread_mutex_lock(&(info->forks[philo->l_fork]));
 		my_printf(info, philo->philo_id, "took a fork");
+		usleep(100);
 		pthread_mutex_lock(&(info->forks[philo->r_fork]));
+		my_printf(info, philo->philo_id, "took a fork");
 	}
 	else
 	{
 		pthread_mutex_lock(&(info->forks[philo->r_fork]));
 		my_printf(info, philo->philo_id, "took a fork");
+		usleep(100);
 		pthread_mutex_lock(&(info->forks[philo->l_fork]));
+		my_printf(info, philo->philo_id, "took a fork");
 	}
-	my_printf(info, philo->philo_id, "took a fork");
 	pthread_mutex_lock(&(info->checker));
-	my_printf(info, philo->philo_id, "eating");
-	philo->finished_eating = ft_time();
+	my_printf(info, philo->philo_id, "is eating");
 	(philo->eaten_meals)++;
+	philo->finished_eating = ft_time();
 	pthread_mutex_unlock(&(info->checker));
 	ft_sleep(info->philo_t_eat, info);
 	pthread_mutex_unlock(&(info->forks[philo->r_fork]));
@@ -79,10 +82,11 @@ void	is_dead(t_info *info, t_philo *philo)
 				return ;
 			}
 			pthread_mutex_unlock(&(info->checker));
-			usleep(100);
+			// usleep(100);
 		}
 		if (is_dead2(info, philo) == 123)
 			break ;
+		usleep(100);
 	}
 }
 
@@ -93,8 +97,8 @@ void	*routine(void *param)
 
 	philo = (t_philo *)param;
 	info = philo->info_lst;
-	if (philo->philo_id % 2)
-		usleep(15000);
+	if (philo->philo_id % 2 == 1)
+		usleep(100);
 	while (1)
 	{
 		pthread_mutex_lock(&(info->checker));
@@ -102,15 +106,15 @@ void	*routine(void *param)
 			|| info->total_p_num == 1)
 		{
 			if (info->total_p_num == 1)
-				printf("%lld 1 is took a fork\n", (ft_time() - info->time));
+				printf("%lld 1 took a fork\n", (ft_time() - info->time));
 			pthread_mutex_unlock(&(info->checker));
 			break ;
 		}
 		pthread_mutex_unlock(&(info->checker));
 		eating(philo);
-		my_printf(info, philo->philo_id, "thinking");
+		my_printf(info, philo->philo_id, "is sleeping");
 		ft_sleep(info->philo_t_sleep, info);
-		my_printf(info, philo->philo_id, "sleeping");
+		my_printf(info, philo->philo_id, "is thinking");
 	}
 	return (NULL);
 }

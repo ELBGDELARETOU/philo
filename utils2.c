@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:13:26 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/23 16:22:05 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/27 19:10:16 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	ft_sleep(long long time, t_info *info)
 		pthread_mutex_unlock(&(info->checker));
 		if ((ft_time() - i) >= time)
 			break ;
-		usleep(50);
+		usleep(10);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:52:25 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/23 16:23:07 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/27 19:14:41 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ long				ft_atoi(char *str);
 int					ft_strlen(char *str);
 int					ft_isdigit(char c);
 long long			ft_time(void);
-void				ft_sleep(long long time, t_info *rules);
 void				my_printf(t_info *info, int i, char *str);
 void				ft_sleep(long long time, t_info *info);
 
