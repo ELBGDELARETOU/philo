@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:52:25 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/27 19:14:41 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/28 19:23:23 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ struct s_info;
 
 typedef struct s_philo
 {
+	int				is_eating;
 	int				philo_id;
 	long long		finished_eating;
 	int				l_fork;
@@ -57,7 +58,7 @@ int					ft_isdigit(char c);
 long long			ft_time(void);
 void				my_printf(t_info *info, int i, char *str);
 void				ft_sleep(long long time, t_info *info);
-
+void				end_ft(t_info *info, t_philo *philo);
 // input check
 bool				check_input(int argc, char **argv);
 

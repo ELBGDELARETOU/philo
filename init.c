@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:14:53 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/27 19:14:44 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/28 17:50:55 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	init_my_philos(t_info *info)
 		info->philos[i].info_lst = info;
 		info->philos[i].eaten_meals = 0;
 		info->philos[i].finished_eating = 0;
+		info->philos[i].is_eating = 0;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: anaouali <anaouali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:21:19 by anaouali          #+#    #+#             */
-/*   Updated: 2024/05/27 19:19:03 by anaouali         ###   ########.fr       */
+/*   Updated: 2024/05/28 19:23:16 by anaouali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,24 @@ void	eating(t_philo *philo)
 	t_info	*info;
 
 	info = philo->info_lst;
-	if (philo->philo_id % 2 == 1)
+	if ((philo->philo_id) % 2 == 1)
 	{
 		pthread_mutex_lock(&(info->forks[philo->l_fork]));
-		my_printf(info, philo->philo_id, "took a fork");
-		usleep(100);
 		pthread_mutex_lock(&(info->forks[philo->r_fork]));
+		my_printf(info, philo->philo_id, "took a fork");
 		my_printf(info, philo->philo_id, "took a fork");
 	}
 	else
 	{
 		pthread_mutex_lock(&(info->forks[philo->r_fork]));
-		my_printf(info, philo->philo_id, "took a fork");
-		usleep(100);
 		pthread_mutex_lock(&(info->forks[philo->l_fork]));
 		my_printf(info, philo->philo_id, "took a fork");
+		my_printf(info, philo->philo_id, "took a fork");
 	}
+	// pthread_mutex_lock(&(info->forks[philo->r_fork]));
+	// pthread_mutex_lock(&(info->forks[philo->l_fork]));
+	// my_printf(info, philo->philo_id, "took a fork");
+	// my_printf(info, philo->philo_id, "took a fork");
 	pthread_mutex_lock(&(info->checker));
 	my_printf(info, philo->philo_id, "is eating");
 	(philo->eaten_meals)++;
@@ -74,7 +76,8 @@ void	is_dead(t_info *info, t_philo *philo)
 		while (++i < info->total_p_num)
 		{
 			pthread_mutex_lock(&(info->checker));
-			if ((ft_time() - philo[i].finished_eating) > info->philo_t_die)
+			if ((ft_time() - philo[i].finished_eating) > info->philo_t_die
+				&& philo->is_eating == 0)
 			{
 				my_printf(info, philo->philo_id, "is dead");
 				info->is_dead = 1;
@@ -82,11 +85,10 @@ void	is_dead(t_info *info, t_philo *philo)
 				return ;
 			}
 			pthread_mutex_unlock(&(info->checker));
-			// usleep(100);
+			usleep(10);
 		}
 		if (is_dead2(info, philo) == 123)
 			break ;
-		usleep(100);
 	}
 }
 
@@ -97,8 +99,8 @@ void	*routine(void *param)
 
 	philo = (t_philo *)param;
 	info = philo->info_lst;
-	if (philo->philo_id % 2 == 1)
-		usleep(100);
+	if (philo->philo_id % 2 == 0)
+		usleep(10);
 	while (1)
 	{
 		pthread_mutex_lock(&(info->checker));
@@ -136,13 +138,6 @@ int	first_step(t_info *info)
 		pthread_mutex_unlock(&(info->checker));
 	}
 	is_dead(info, info->philos);
-	i = -1;
-	while (++i < info->total_p_num)
-		pthread_join(philo[i].thread_id, NULL);
-	i = -1;
-	while (++i < info->total_p_num)
-		pthread_mutex_destroy(&(info->forks[i]));
-	pthread_mutex_destroy(&(info->writing));
-	pthread_mutex_destroy(&(info->checker));
+	end_ft(info, philo);
 	return (0);
 }
